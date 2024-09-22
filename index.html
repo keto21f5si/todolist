@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoリスト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: monospace, arial, sans-serif;
+            text-align: center;
+        }
+        html {
+            overflow-x: hidden;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 40px;
+            color: #111;
+        }
+        p {
+            font-size: 18px;
+            color: #111;
+        }
+        small {
+            font-size: 16px;
+            color: #333;
+        }
+        fieldset {
+            border: 1px solid #eed;
+            padding: 10px;
+            text-align: left;
+            align-items: center;
+            background-color: #ffe;
+            margin-block: 20px;
+        }
+        legend {
+            background-color: #fff9;
+        }
+        input {
+            font-size: 18px;
+            padding: 2px;
+            border: 1px solid #ddd;
+            border-radius: 1px;
+            caret-color: #1118;
+            background-color: #fff;
+            color: #111;
+        }
+        input:focus {
+            outline: 2px solid #5555;
+        }
+        button {
+            font-size: 18px;
+            background-color: #fff;
+            color: #111;
+            border: 1px solid #ddd;
+            border-radius: 1px;
+            text-align: center;
+            align-items: center;
+            width: 50px;
+            height: 30px;
+            margin: 10px;
+            transition-duration: 0.3s;
+        }
+        button:active {
+            scale: 0.9;
+        }
+        ul {
+            margin-block: 20px;
+        }
+        li {
+            list-style: none;
+            border: 1px solid #eed;
+            border-radius: 5px;
+            background-color: #ffe;
+            margin-block: 10px;
+            padding: 5px;
+            text-align: left;
+            font-size: 18px;
+            overflow-wrap: anywhere;
+        }
+        li button {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ToDoリスト</h1>
+    </header>
+    <main>
+        <fieldset>
+            <legend>
+                <p>ToDoを追加する</p>
+            </legend>
+            <form>
+                <input type="text" id="todoInput" placeholder="YOUR_TASK_HERE!">
+                <button type="button" id="todoAdd">追加</button>
+            </form>
+        </fieldset>
+        <ul id="todoList"></ul>
+    </main>
+    <footer>
+        <small>
+            All rights reserved.<br>
+            &copy; 2024 keto
+        </small>
+    </footer>
+    <script>
+        // 要素を定義
+        const todoInput = document.getElementById("todoInput");
+        const todoAdd = document.getElementById("todoAdd");
+        const todoList = document.getElementById("todoList");
+        // タスクを追加
+        todoAdd.addEventListener("click", function() {
+            if (todoInput.value !== "") {
+                // インプットテキスト
+                const newLi = document.createElement("li");
+                newLi.textContent = todoInput.value;
+                todoList.appendChild(newLi);
+                // 削除ボタン
+                const newBtn = document.createElement("button");
+                newBtn.textContent = "削除";
+                newLi.appendChild(newBtn);
+                todoInput.value = "";
+                // 削除
+                newBtn.addEventListener("click", function() {
+                    newLi.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
