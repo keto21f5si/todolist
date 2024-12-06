@@ -8,80 +8,110 @@
         * {
             margin: 0;
             padding: 0;
-            font-family: monospace, arial, sans-serif;
-            text-align: center;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
-        html {
+
+        body {
             overflow-x: hidden;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 40px;
-            color: #111;
-        }
-        p {
-            font-size: 18px;
-            color: #111;
-        }
-        small {
-            font-size: 16px;
-            color: #333;
-        }
-        fieldset {
-            border: 1px solid #eed;
-            padding: 10px;
-            text-align: left;
-            align-items: center;
-            background-color: #ffe;
-            margin-block: 20px;
-        }
-        legend {
-            background-color: #fff9;
-        }
-        input {
-            font-size: 18px;
-            padding: 2px;
-            border: 1px solid #ddd;
-            border-radius: 1px;
-            caret-color: #1118;
-            background-color: #fff;
-            color: #111;
-        }
-        input:focus {
-            outline: 2px solid #5555;
-        }
-        button {
-            font-size: 18px;
-            background-color: #fff;
-            color: #111;
-            border: 1px solid #ddd;
-            border-radius: 1px;
-            text-align: center;
-            align-items: center;
-            width: 50px;
-            height: 30px;
-            margin: 10px;
-            transition-duration: 0.3s;
-        }
-        button:active {
-            scale: 0.9;
-        }
-        ul {
-            margin-block: 20px;
-        }
-        li {
-            list-style: none;
-            border: 1px solid #eed;
-            border-radius: 5px;
-            background-color: #ffe;
-            margin-block: 10px;
-            padding: 5px;
-            text-align: left;
-            font-size: 18px;
             overflow-wrap: anywhere;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            text-align: center;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            border: none;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        legend p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        input {
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            font-size: 1rem;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         li button {
-            margin: 0;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        li button:hover {
+            background-color: #a71d2a;
+        }
+
+        footer small {
+            display: block;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -92,10 +122,12 @@
     <main>
         <fieldset>
             <legend>
-                <p>ToDoを追加する</p>
+                <p>
+                    ToDoを追加する
+                </p>
             </legend>
             <form>
-                <input type="text" id="todoInput" placeholder="YOUR_TASK_HERE!">
+                <input type="text" id="inPut" placeholder="YOUR_TASK_HERE!">
                 <button type="button" id="todoAdd">追加</button>
             </form>
         </fieldset>
@@ -108,26 +140,37 @@
         </small>
     </footer>
     <script>
-        // 要素を定義
-        const todoInput = document.getElementById("todoInput");
+        const inPut = document.getElementById("inPut");
         const todoAdd = document.getElementById("todoAdd");
         const todoList = document.getElementById("todoList");
-        // タスクを追加
-        todoAdd.addEventListener("click", function() {
-            if (todoInput.value !== "") {
-                // インプットテキスト
-                const newLi = document.createElement("li");
-                newLi.textContent = todoInput.value;
-                todoList.appendChild(newLi);
-                // 削除ボタン
+
+        const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        savedTasks.forEach(task => taskToList(task));
+
+        function taskToList(task) {
+            const li = document.createElement("li");
+                li.textContent = task;
+                todoList.appendChild(li);
                 const newBtn = document.createElement("button");
                 newBtn.textContent = "削除";
-                newLi.appendChild(newBtn);
-                todoInput.value = "";
-                // 削除
-                newBtn.addEventListener("click", function() {
-                    newLi.remove();
+                li.appendChild(newBtn);
+                newBtn.addEventListener("click", () => {
+                    li.remove();
+                    saveTasks();
                 });
+        }
+
+        function saveTasks() {
+            const listItems = Array.from(todoList.children);
+            const tasks = listItems.map(li => li.firstChild.textContent);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        todoAdd.addEventListener("click", () => {
+            if (inPut.value !== "") {
+                taskToList(inPut.value);
+                saveTasks();
+                inPut.value = "";
             }
         });
     </script>
