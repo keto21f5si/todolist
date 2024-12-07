@@ -1,184 +1,183 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoリスト</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+        text-align: center;
+      }
 
-        body {
-            -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
-            overflow-wrap: anywhere;
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 20px;
-        }
+      body {
+        -webkit-text-size-adjust: 100%;
+        overflow-x: hidden;
+        overflow-wrap: anywhere;
+        background-color: #f4f4f4;
+        color: #333;
+        padding: 20px;
+      }
 
-        h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
+      h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+      }
 
-        fieldset {
-            min-width: 350px;
-            max-width: 400px;
-            margin: auto;
-            border: none;
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
+      fieldset {
+        min-width: 350px;
+        max-width: 400px;
+        margin: auto;
+        border: none;
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
 
-        legend p {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #555;
-        }
+      legend p {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #555;
+      }
 
-        input {
-            font-size: 1rem;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 70%;
-            margin-right: 10px;
-        }
+      input {
+        font-size: 1rem;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 70%;
+        margin-right: 10px;
+      }
 
-        input:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
+      input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
 
-        button {
-            font-size: 1rem;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      button {
+        font-size: 1rem;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+      button:hover {
+        background-color: #0056b3;
+      }
 
-        ul {
-            list-style: none;
-            margin-top: 20px;
-            padding: 0;
-        }
+      ul {
+        list-style: none;
+        margin-top: 20px;
+        padding: 0;
+      }
 
-        li {
-            min-width: 350px;
-            max-width: 400px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            text-align: left;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      li {
+        min-width: 350px;
+        max-width: 400px;
+        margin: auto;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        li button {
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      li button {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-        li button:hover {
-            background-color: #a71d2a;
-        }
+      li button:hover {
+        background-color: #a71d2a;
+      }
 
-        footer small {
-            display: block;
-            margin-top: 30px;
-            color: #888;
-            font-size: 0.9rem;
-        }
+      footer small {
+        display: block;
+        margin-top: 30px;
+        color: #888;
+        font-size: 0.9rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>ToDoリスト</h1>
+      <h1>ToDoリスト</h1>
     </header>
     <main>
-        <fieldset>
-            <legend>
-                <p>
-                    タスクを追加する
-                </p>
-            </legend>
-            <form>
-                <input type="text" id="inPut" placeholder="YOUR_TASK_HERE!">
-                <button type="button" id="todoAdd">追加</button>
-            </form>
-        </fieldset>
-        <ul id="todoList"></ul>
+      <fieldset>
+        <legend>
+          <p>タスクを追加する</p>
+        </legend>
+        <form>
+          <input type="text" id="inPut" placeholder="例: 英語学習" />
+          <button type="button" id="todoAdd">追加</button>
+        </form>
+      </fieldset>
+      <ul id="todoList"></ul>
     </main>
     <footer>
-        <small>
-            All rights reserved.<br>
-            &copy; 2024 keto.
-        </small>
+      <small>
+        All rights reserved.<br />
+        &copy; 2024 keto.
+      </small>
     </footer>
     <script>
-        const inPut = document.getElementById("inPut");
-        const todoAdd = document.getElementById("todoAdd");
-        const todoList = document.getElementById("todoList");
+      const inPut = document.getElementById("inPut");
+      const todoAdd = document.getElementById("todoAdd");
+      const todoList = document.getElementById("todoList");
 
-        const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        savedTasks.forEach(task => taskToList(task));
+      const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      savedTasks.forEach((task) => taskToList(task));
 
-        function taskToList(task) {
-            const li = document.createElement("li");
-                li.textContent = task;
-                todoList.appendChild(li);
-                const newBtn = document.createElement("button");
-                newBtn.textContent = "削除";
-                li.appendChild(newBtn);
-                newBtn.addEventListener("click", () => {
-                    li.remove();
-                    saveTasks();
-                });
-        }
-
-        function saveTasks() {
-            const listItems = Array.from(todoList.children);
-            const tasks = listItems.map(li => li.firstChild.textContent);
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-
-        todoAdd.addEventListener("click", () => {
-            if (inPut.value !== "") {
-                taskToList(inPut.value);
-                saveTasks();
-                inPut.value = "";
-            }
+      function taskToList(task) {
+        const li = document.createElement("li");
+        li.textContent = task;
+        todoList.appendChild(li);
+        const newBtn = document.createElement("button");
+        newBtn.textContent = "削除";
+        li.appendChild(newBtn);
+        newBtn.addEventListener("click", () => {
+          li.remove();
+          saveTasks();
         });
+      }
+
+      function saveTasks() {
+        const listItems = Array.from(todoList.children);
+        const tasks = listItems.map((li) => li.firstChild.textContent);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      todoAdd.addEventListener("click", () => {
+        if (inPut.value !== "") {
+          taskToList(inPut.value);
+          saveTasks();
+          inPut.value = "";
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
