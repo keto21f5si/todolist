@@ -1,8 +1,6 @@
 const cacheName = "todo-app-cache-v1";
 const assets = [
-  "./index.html",
-  "./manifest.json",
-  "./keto.svg"
+  "./index.html"
 ];
 
 self.addEventListener("install", (event) => {
