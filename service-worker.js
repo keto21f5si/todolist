@@ -1,20 +1,29 @@
-const cacheName = "todo-app-cache-v1";
-const assets = [
+const CACHE_NAME = "keto21f5si-cache-v1";
+const urlsToCache = [
+  "./",
   "./index.html"
 ];
-
-self.addEventListener("install", (event) => {
+self.addEventListener("install", function(event) {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      return cache.addAll(assets);
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(urlsToCache);
     })
-  );
+  })
 });
 
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
+self.addEventListener("fetch", function(event) {
+  event.respondWith(async function() {
+    try {
+      if (event.request.url.startsWith("http")) {
+        let res = await fetch(event.request);
+        let cache = await cache.open(CACHE_NAME);
+        cache.put(event.request.url, res.clone());
+        return res;
+      }
+      return fetch(event.request);
+    }
+    catch (error) {
+      return cache.match(event.request);
+    }
+  }());
 });
